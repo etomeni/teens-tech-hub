@@ -7,7 +7,7 @@ import Link from "next/link";
 import {
   useTheme, Container, Box, Grid, Stack,
   Card, CardMedia, CardContent, CardActionArea, CardHeader,
-  Typography, IconButton, Button, Badge
+  Typography, IconButton, Button, Badge, Modal
 } from "@mui/material";
 
 // mui icons
@@ -19,20 +19,29 @@ import {
 import { _product_ } from "../../../src/typeModel";
 import { getLocalStorage, setLocalStorage } from "../../../src/serviceFunctions/storeage";
 import { sanitizedString } from "../../../src/serviceFunctions/resources";
+import CheckOutView from "../../../src/Components/shop/checkOutView";
 
 const Cart: NextPage = () => {
   const [cart, setCart] = useState<_product_[]>([]);
 
-  if (!cart.length) {
-    getLocalStorage("cart").then((res: any) => {
-      console.log(res);
+  const [openCheckboxModal, setOpenCheckboxModal] = useState(false);
+  const handleOpenCheckboxModal = () => setOpenCheckboxModal(true);
+  const handleCloseCheckboxModal = () => setOpenCheckboxModal(false);
+  useEffect(
+    () => {
+      console.log("testing");
       
-      if (res && res.length) {
-        setCart(res);
+      if (!cart.length) {
+        getLocalStorage("cart").then((res: any) => {
+          // console.log(res);
+          if (res && res.length) {
+            setCart(res);
+          }
+        });
       }
-    });
-  }
-  
+    }, []
+  );
+
   useEffect(
     () => {
       setLocalStorage("cart", cart);
@@ -168,13 +177,13 @@ const Cart: NextPage = () => {
                           </Button>
 
                           <Stack direction='row' spacing='auto' alignItems="center" sx={{ margin: '0', padding: '0' }}>
-                            <Button variant="contained" onClick={() => { handleCartItemCount(cartItem, 'minus'); console.log("minus"); }}> - </Button>
+                            <Button variant="contained" onClick={() => { handleCartItemCount(cartItem, 'minus'); }}> - </Button>
 
                             <Typography variant="body2" color="primary" sx={{ paddingX: "15px", margin: '0', paddingY: '0' }}> 
                               { cartItem.count }
                             </Typography>
 
-                            <Button variant="contained" onClick={() => { handleCartItemCount(cartItem, 'plus'); console.log("add"); }}> + </Button>
+                            <Button variant="contained" onClick={() => { handleCartItemCount(cartItem, 'plus'); }}> + </Button>
                           </Stack>
                         </Stack>
                       </Stack>
@@ -213,9 +222,8 @@ const Cart: NextPage = () => {
 
               <Box paddingX='15px' paddingY='10px'>
                 <Button variant="contained" fullWidth 
-                  onClick={() => { console.log("hello");}}
+                  onClick={() => { handleOpenCheckboxModal(); }}
                 >
-                  {/* CHECKOUT (₦ 1,477,450) */}
                   CHECKOUT
                 </Button>
               </Box>
@@ -224,6 +232,22 @@ const Cart: NextPage = () => {
         </Grid>
         
       </Container>
+
+
+      <Modal
+        open={openCheckboxModal}
+        onClose={handleCloseCheckboxModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        sx={{ 
+          backgroundColor: '#eee',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+       }}
+      >
+        <CheckOutView />
+      </Modal>
     </div>
   );
 };
