@@ -24,14 +24,14 @@ import { Pagination, Autoplay, Navigation, Scrollbar, A11y } from "swiper";
 
 import products from "../../src/Components/shop/products";
 import { sanitizedString } from "../../src/serviceFunctions/resources";
-import { _product_ } from "../../src/typeModel";
+import { _productsType_ } from "../../src/typeModel";
 import { getLocalStorage, setLocalStorage } from "../../src/serviceFunctions/storeage";
 import CheckOutView from "../../src/Components/shop/checkOutView";
 
 const Shop = () => {
-  const [productItem, setProductItem] = useState<_product_>();
+  const [productItem, setProductItem] = useState<_productsType_>();
   const [displayImage, setDisplayImage] = useState('');
-  const [cart, setCart] = useState<_product_[]>([]);
+  const [cart, setCart] = useState<_productsType_[]>([]);
   const router = useRouter();
 
   const [openCheckboxModal, setOpenCheckboxModal] = useState(false);
@@ -64,12 +64,17 @@ const Shop = () => {
     () => {
       if (!cart.length) {
         getLocalStorage("cart").then((res: any) => {
+          // console.log(res);
           if (res && res.length) {
             setCart(res);
           }
         });
       }
-      
+    }, []
+  );
+
+  useEffect(
+    () => {
       setLocalStorage("cart", cart);
       
       // clean up function
@@ -83,10 +88,10 @@ const Shop = () => {
     () => {
       getContry();
 
-      const _productItem: _product_ = products.filter((evt) => {
+      const _productItem: _productsType_ = products.filter((evt) => {
         // return evt.id === router.query.title;
         // return sanitizedString(evt.title) === router.query.title;
-        if(sanitizedString(evt.title) === router.query.title) {
+        if(sanitizedString(evt.name) === router.query.title) {
 
           setProductItem(evt);
           setDisplayImage(evt.image);
@@ -115,12 +120,12 @@ const Shop = () => {
   ];
 
     
-  function handleAddRemoveCart(productItem: _product_, action: 'add' | 'remove' = 'add') {
-    const selectedProductItemIndex = cart.findIndex((ele: _product_) => ele.id == productItem.id);
+  function handleAddRemoveCart(productItem: _productsType_, action: 'add' | 'remove' = 'add') {
+    const selectedProductItemIndex = cart.findIndex((ele: _productsType_) => ele.id == productItem.id);
 
     if (action == 'add') {
       if (selectedProductItemIndex === -1 ) {
-        const newCartItem: _product_ = {
+        const newCartItem: _productsType_ = {
           ...productItem,
           count: 1
         };
@@ -135,8 +140,8 @@ const Shop = () => {
 
   };
 
-  function handleCartItemCount(product: _product_, action: 'plus' | 'minus') {
-    const productItem = cart.find((ele: _product_) => ele.id == product.id);
+  function handleCartItemCount(product: _productsType_, action: 'plus' | 'minus') {
+    const productItem = cart.find((ele: _productsType_) => ele.id == product.id);
     
     if (productItem) {
       const count: number = productItem.count ? productItem.count : 0;
@@ -154,7 +159,7 @@ const Shop = () => {
         }
       }
 
-      const selectedProductItemIndex = cart.findIndex((ele: _product_) => ele.id == productItem.id);
+      const selectedProductItemIndex = cart.findIndex((ele: _productsType_) => ele.id == productItem.id);
       if (selectedProductItemIndex !== -1 ) {
         cart[selectedProductItemIndex] = productItem;
         setCart([ ...cart ]);
@@ -167,10 +172,10 @@ const Shop = () => {
   return (
     <>
       <Head>
-        <title>Teens Tech Shop - { productItem.title }</title>
+        <title>Teens Tech Shop - { productItem.name }</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <meta name="description" content={ productItem.title } />
-        <meta name="keywords" content={`Teens Tech Shop, Teens Shop, Tech Hub, Tech Shop, Shop ${productItem.title}`} />
+        <meta name="description" content={ productItem.name } />
+        <meta name="keywords" content={`Teens Tech Shop, Teens Shop, Tech Hub, Tech Shop, Shop ${productItem.name}`} />
       </Head>
 
       <Container sx={{ marginTop: "25px" }}>
@@ -183,7 +188,7 @@ const Shop = () => {
                   height: '250px',
                   marginBottom: '15px'
                 }}>
-                  <img src={ displayImage } alt={ productItem.title } style={{
+                  <img src={ displayImage } alt={ productItem.name } style={{
                     width: '100%',
                     height: '250px',
                     // padding: '15px'
@@ -224,7 +229,7 @@ const Shop = () => {
                 </Box>
 
                 <Typography gutterBottom variant="body2" component="div">
-                  { productItem.title }
+                  { productItem.name }
                 </Typography>
 
                   <Typography gutterBottom variant="h6" component="h6">
@@ -305,6 +310,7 @@ const Shop = () => {
               <Box paddingX='15px' paddingY='10px'>
                 <Button variant="contained" fullWidth 
                   onClick={() => { handleOpenCheckboxModal(); }}
+                  disabled={ cart.reduce((sum: any, obj: any) => sum + (obj.price * obj.count || 1), 0) ? false : true }
                 >
                   CHECKOUT
                 </Button>
@@ -319,7 +325,7 @@ const Shop = () => {
               </CardContent>
 
               <CardContent sx={{ borderBottom: "1px solid #eee" }}>
-                {cart.map((cartItem: _product_, index: number) => {
+                {cart.map((cartItem: _productsType_, index: number) => {
                   return (
                     <Box key={index} 
                       sx={{ 
@@ -332,7 +338,7 @@ const Shop = () => {
                         <Stack direction='row' spacing='auto' marginY="15px" sx={{ width: '100%' }}>
                           <Box>
                             <img src={ cartItem.image } 
-                              alt={ sanitizedString(cartItem.title) } 
+                              alt={ sanitizedString(cartItem.name) } 
                               style={{ 
                                 maxWidth: "70px", float: "left", clear: "both", 
                                 marginRight: '5px' 
@@ -340,7 +346,7 @@ const Shop = () => {
                             />
 
                             <Typography gutterBottom variant="body2" component="div" paddingX="5px">
-                              { cartItem.title }
+                              { cartItem.name }
                             </Typography>
                           </Box>
 
@@ -372,9 +378,9 @@ const Shop = () => {
                   <Typography gutterBottom variant="h6" component="h6">
                     { 
                       Intl.NumberFormat('en-NG', {
-                      style: 'currency',
-                      currency: 'NGN',
-                      maximumFractionDigits: 0,
+                        style: 'currency',
+                        currency: 'NGN',
+                        maximumFractionDigits: 0,
                       }).format(cart.reduce((sum: any, obj: any) => sum + (obj.price * obj.count || 1), 0 ))
                     }
                   </Typography>
@@ -383,7 +389,8 @@ const Shop = () => {
 
               <Box paddingX='15px' paddingY='10px'>
                 <Button variant="contained" fullWidth 
-                  onClick={() => { handleOpenCheckboxModal(); console.log("check out button");}}
+                  onClick={() => { handleOpenCheckboxModal(); }}
+                  disabled={ cart.reduce((sum: any, obj: any) => sum + (obj.price * obj.count || 1), 0) ? false : true }
                 >
                   CHECKOUT
                 </Button>
@@ -405,7 +412,17 @@ const Shop = () => {
           alignItems: 'center'
        }}
       >
-        <CheckOutView />
+        <Box width="100%" sx={{ 
+          backgroundColor: '#fff',
+          display: 'block',
+          width: '100%',
+          minWidth: '300px',
+          maxWidth: '600px',
+          padding: '15px',
+          borderRadius: '10px'
+        }}>
+          <CheckOutView products={ cart } closePayNowModal={ handleCloseCheckboxModal } />
+        </Box>
       </Modal>
     </>
   );

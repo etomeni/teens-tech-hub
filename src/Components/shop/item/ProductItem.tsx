@@ -6,22 +6,22 @@ import {
     Typography, Button
 } from "@mui/material";
 
-import { _product_ } from "../../../typeModel";
+import { _productsType_ } from "../../../typeModel";
 import { sanitizedString } from "../../../serviceFunctions/resources";
 
 function ProductItem(
     { product, cart, handleAddRemoveCart, handleCartItemCount, displayCount }: 
-    { product: _product_, cart: _product_[], handleAddRemoveCart: any, handleCartItemCount: any, displayCount: any }
+    { product: _productsType_, cart: _productsType_[], handleAddRemoveCart: any, handleCartItemCount: any, displayCount: any }
 ) {
     return (
         <Card>
-            <Link href={`/shop/${ sanitizedString(product.title) }`}>
+            <Link href={`/shop/${ sanitizedString(product.name) }`}>
                 <CardActionArea>
                         <Box sx={{
                             width: '100%',
                             height: 200,
                         }}>
-                            <img src={ product.image } alt={ product.title } style={{
+                            <img src={ product.image } alt={ product.name } style={{
                             width: '100%',
                             height: '200px',
                             padding: '10px'
@@ -30,7 +30,7 @@ function ProductItem(
 
                         <CardContent>
                             <Typography gutterBottom variant="body2" component="div">
-                                { product.title }
+                                { product.name }
                             </Typography>
 
                             <Typography gutterBottom variant="h5" component="div">

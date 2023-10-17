@@ -16,21 +16,25 @@ import {
   OnlinePrediction, Delete
 } from "@mui/icons-material";
 
-import { _product_ } from "../../../src/typeModel";
 import { getLocalStorage, setLocalStorage } from "../../../src/serviceFunctions/storeage";
 import { sanitizedString } from "../../../src/serviceFunctions/resources";
 import CheckOutView from "../../../src/Components/shop/checkOutView";
+import { _productsType_ } from "../../../src/typeModel";
+import SuccessPaymentModal from "../../../src/Components/shop/successPaymentModal";
 
 const Cart: NextPage = () => {
-  const [cart, setCart] = useState<_product_[]>([]);
+  const [cart, setCart] = useState<_productsType_[]>([]);
 
   const [openCheckboxModal, setOpenCheckboxModal] = useState(false);
   const handleOpenCheckboxModal = () => setOpenCheckboxModal(true);
   const handleCloseCheckboxModal = () => setOpenCheckboxModal(false);
+
+  const [openSuccessModal, setOpenSuccessModal] = useState(false);
+  const handleOpenSuccessModal = () => setOpenSuccessModal(true);
+  const handleCloseSuccessModal = () => setOpenSuccessModal(false);
+
   useEffect(
     () => {
-      console.log("testing");
-      
       if (!cart.length) {
         getLocalStorage("cart").then((res: any) => {
           // console.log(res);
@@ -48,7 +52,7 @@ const Cart: NextPage = () => {
       
       // clean up function
       return () => {
-        // const _totalCart = cart.reduce((sum: any, obj: _product_) => sum + obj.count, 0 );
+        // const _totalCart = cart.reduce((sum: any, obj: _productsType_) => sum + obj.count, 0 );
         // console.log(_totalCart);
       }
     },
@@ -56,12 +60,12 @@ const Cart: NextPage = () => {
   );
 
     
-  function handleAddRemoveCart(productItem: _product_, action: 'add' | 'remove' = 'add') {
-    const selectedProductItemIndex = cart.findIndex((ele: _product_) => ele.id == productItem.id);
+  function handleAddRemoveCart(productItem: _productsType_, action: 'add' | 'remove' = 'add') {
+    const selectedProductItemIndex = cart.findIndex((ele: _productsType_) => ele.id == productItem.id);
 
     if (action == 'add') {
       if (selectedProductItemIndex === -1 ) {
-        const newCartItem: _product_ = {
+        const newCartItem: _productsType_ = {
           ...productItem,
           count: 1
         };
@@ -75,8 +79,8 @@ const Cart: NextPage = () => {
     }
   };
 
-  function handleCartItemCount(product: _product_, action: 'plus' | 'minus') {
-    const productItem = cart.find((ele: _product_) => ele.id == product.id);
+  function handleCartItemCount(product: _productsType_, action: 'plus' | 'minus') {
+    const productItem = cart.find((ele: _productsType_) => ele.id == product.id);
     
     if (productItem) {
       const count: number = productItem.count ? productItem.count : 0;
@@ -94,7 +98,7 @@ const Cart: NextPage = () => {
         }
       }
 
-      const selectedProductItemIndex = cart.findIndex((ele: _product_) => ele.id == productItem.id);
+      const selectedProductItemIndex = cart.findIndex((ele: _productsType_) => ele.id == productItem.id);
       if (selectedProductItemIndex !== -1 ) {
         cart[selectedProductItemIndex] = productItem;
         setCart([ ...cart ]);
@@ -110,7 +114,7 @@ const Cart: NextPage = () => {
       <Head>
         <title>Teens Tech Hub - Cart</title>
         <meta name="description" content="Teens Tech Hub - Shop" />
-        <meta name="keywords" content="Teens Tech Hub - Shop" />
+        <meta name="keywords" content="Teens Shop, Teen Shop, Tech Shop, Tech Hub, Teens Hub, Teen Hub, Hub Shop" />
         <meta name="robots" content="index, follow" />
         <meta name="title" content="Cart" />
       </Head>
@@ -121,12 +125,12 @@ const Cart: NextPage = () => {
             <Card sx={{ paddingBottom: '0' }}>
               <CardContent sx={{ borderBottom: "1px solid #eee", paddingY: "10px" }}>
                 <Typography gutterBottom variant="h5" component="h5" sx={{margin: '0'}}>
-                  Cart ({ cart.reduce((sum: any, obj: _product_) => sum + obj.count, 0 ) })
+                  Cart ({ cart.reduce((sum: any, obj: _productsType_) => sum + obj.count, 0 ) })
                 </Typography>
               </CardContent>
 
               <CardContent sx={{ paddingBottom: '0', marginBottom: '0' }}>
-                {cart.map((cartItem: _product_, index: number) => {
+                {cart.map((cartItem: _productsType_, index: number) => {
                   return (
                     <Box key={index} 
                       sx={{ 
@@ -138,11 +142,11 @@ const Cart: NextPage = () => {
                       <Stack direction="column" spacing="auto" alignItems="center">
                         <Stack direction='row' spacing='auto' marginY="15px" sx={{ width: '100%' }}>
                           <Link 
-                            href={`/shop/${ sanitizedString(cartItem.title) }`}
+                            href={`/shop/${ sanitizedString(cartItem.name) }`}
                           >
                             <Box>
                               <img src={ cartItem.image } 
-                                alt={ sanitizedString(cartItem.title) } 
+                                alt={ sanitizedString(cartItem.name) } 
                                 style={{ 
                                   maxWidth: "100px", float: "left", clear: "both", 
                                   marginRight: '10px' 
@@ -150,7 +154,7 @@ const Cart: NextPage = () => {
                               />
 
                               <Typography gutterBottom variant="body2" component="div" paddingX="10px">
-                                { cartItem.title }
+                                { cartItem.name }
                               </Typography>
                             </Box>
                           </Link>
@@ -223,6 +227,7 @@ const Cart: NextPage = () => {
               <Box paddingX='15px' paddingY='10px'>
                 <Button variant="contained" fullWidth 
                   onClick={() => { handleOpenCheckboxModal(); }}
+                  disabled={ cart.reduce((sum: any, obj: any) => sum + (obj.price * obj.count || 1), 0 ) ? false : true }
                 >
                   CHECKOUT
                 </Button>
@@ -246,7 +251,42 @@ const Cart: NextPage = () => {
           alignItems: 'center'
        }}
       >
-        <CheckOutView />
+        <Box width="100%" sx={{ 
+          backgroundColor: '#fff',
+          display: 'block',
+          width: '100%',
+          minWidth: '300px',
+          maxWidth: '600px',
+          padding: '15px',
+          borderRadius: '10px'
+        }}>
+          <CheckOutView products={ cart } closePayNowModal={ handleCloseCheckboxModal } />
+        </Box>
+      </Modal>
+
+      <Modal
+        open={openSuccessModal}
+        onClose={handleCloseSuccessModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        sx={{ 
+          backgroundColor: '#eee',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+       }}
+      >
+        <Box width="100%" sx={{ 
+          backgroundColor: '#fff',
+          display: 'block',
+          width: '100%',
+          minWidth: '300px',
+          maxWidth: '600px',
+          padding: '15px',
+          borderRadius: '10px'
+        }}>
+          {/* <SuccessPaymentModal closeSuccessModal={ handleCloseSuccessModal } /> */}
+        </Box>
       </Modal>
     </div>
   );

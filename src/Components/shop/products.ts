@@ -1,7 +1,10 @@
+import { _productsType_ } from "../../typeModel";
+
 //event status code: 'upcoming' and 'past'
-const products = [
+const products: _productsType_[] = [
   {
-    title: "Hp 15 Intel Core I3 15.6 4GB RAM/1TB HDD Win 10 - Black",
+    id: "1",
+    name: "Hp 15 Intel Core I3 15.6 4GB RAM/1TB HDD Win 10 - Black",
     price: 296490,
     units: 5,
     // contact: ["08052465145", "08060386628"],
@@ -18,10 +21,12 @@ const products = [
       rest assured that the HP 15 can keep up with the day's work.
     `,
     image: "/images/shop/hp-pavillion.png",
-    id: "1",
+    createdAt: "2023-10-16 5:05:28",
+    updatedAt: "2023-10-16 5:05:28"
   },
   {
-    title: "Hp 15 10th Gen Intel Core I3 (12GB,1TB HDD)Touchscreen Wins 10",
+    id: "2",
+    name: "Hp 15 10th Gen Intel Core I3 (12GB,1TB HDD)Touchscreen Wins 10",
     price: 375000,
     units: 14,
     // contact: ["08052465145", "08060386628"],
@@ -35,10 +40,12 @@ const products = [
       Operating System: Windows 10 \n
     `,
     image: "/images/shop/hp-folio.png",
-    id: "2",
+    createdAt: "2023-10-16 5:05:28",
+    updatedAt: "2023-10-16 5:05:28"
   },
   {
-    title: "Toshiba V15 Intel Core I3 8GB RAM 1TB HDD Wins 10 Pro +Free Led Lamp",
+    id: "3",
+    name: "Toshiba V15 Intel Core I3 8GB RAM 1TB HDD Wins 10 Pro +Free Led Lamp",
     price: 230000,
     units: 4,
     // contact: ["08052465145", "08060386628"],
@@ -50,10 +57,12 @@ const products = [
       Memory 4GB Soldered DDR4-2666
     `,
     image: "/images/shop/toshiba.png",
-    id: "3",
+    createdAt: "2023-10-16 5:05:28",
+    updatedAt: "2023-10-16 5:05:28"
   },
   {
-    title: "Lenovo IdeaPad 3 15' - Intel Core I3 -1005G1- 8GB RAM 256GB SSD - Platinum Grey",
+    id: "4",
+    name: "Lenovo IdeaPad 3 15' - Intel Core I3 -1005G1- 8GB RAM 256GB SSD - Platinum Grey",
     price: 264000,
     units: 9,
     // contact: ["08052465145", "08060386628"],
@@ -66,10 +75,12 @@ const products = [
       to showcase your games and HD movies with impressive color and clarity.
     `,
     image: "/images/shop/mi-laptop.png",
-    id: "4",
+    createdAt: "2023-10-16 5:05:28",
+    updatedAt: "2023-10-16 5:05:28"
   },
   {
-    title: "Apple IPad Pro 12.9' M2(2022 Model)Wi-Fi+Cellular-512GB-Space Gray",
+    id: "5",
+    name: "Apple IPad Pro 12.9' M2(2022 Model)Wi-Fi+Cellular-512GB-Space Gray",
     price: 1250000,
     units: 1,
     // contact: ["08052465145", "08060386628"],
@@ -84,10 +95,12 @@ const products = [
       performance and new capabilities to 
     `,
     image: "/images/shop/ipad-pen-stand.png",
-    id: "5",
+    createdAt: "2023-10-16 5:05:28",
+    updatedAt: "2023-10-16 5:05:28"
   },
   {
-    title: "Apple IPad 10th Gen 10.9' Wi-Fi + Cellular 64GB - Blue - 2022 Model",
+    id: "6",
+    name: "Apple IPad 10th Gen 10.9' Wi-Fi + Cellular 64GB - Blue - 2022 Model",
     price: 625999,
     units: 6,
     // contact: ["08052465145", "08060386628"],
@@ -100,10 +113,12 @@ const products = [
       Wi-Fi and cellular connectivity.
     `,
     image: "/images/shop/ipad-frontView.png",
-    id: "6",
+    createdAt: "2023-10-16 5:05:28",
+    updatedAt: "2023-10-16 5:05:28"
   },
   {
-    title: "Apple IPad 9th Gen - 10.2 - Wi-Fi Only - 256GB - Silver - 2021",
+    id: "7",
+    name: "Apple IPad 9th Gen - 10.2 - Wi-Fi Only - 256GB - Silver - 2021",
     price: 499999,
     units: 3,
     // contact: ["08052465145", "08060386628"],
@@ -115,10 +130,12 @@ const products = [
       All without being slowed down.
     `,
     image: "/images/shop/ipad-bothside.png",
-    id: "7",
+    createdAt: "2023-10-16 5:05:28",
+    updatedAt: "2023-10-16 5:05:28"
   },
   {
-    title: "Sony Xiaoxin Pad 10.6 Inch 2022 WiFi Tablet, 6GB+128GB Android 12",
+    id: "8",
+    name: "Sony Xiaoxin Pad 10.6 Inch 2022 WiFi Tablet, 6GB+128GB Android 12",
     price: 172996,
     units: 5,
     // contact: ["08052465145", "08060386628"],
@@ -135,7 +152,8 @@ const products = [
       9. Features: multiple eye protection modes, learning assistant, split-screen display
     `,
     image: "/images/shop/sony-tablet.png",
-    id: "8",
+    createdAt: "2023-10-16 5:05:28",
+    updatedAt: "2023-10-16 5:05:28"
   },
 ];
 
