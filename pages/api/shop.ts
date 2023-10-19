@@ -1,14 +1,15 @@
 import { _customersType_, _ordersType_, _productsType_ } from "../../src/typeModel";
 import nodemailer from 'nodemailer';
 
-const hostSender = "oyaanow.com";
-const hostPassword = "8kPER9m?T_F-";
-const hostEmail = "bookings@oyaanow.com";
+const hostSender = process.env.hostSender;
+const hostPassword = process.env.hostPassword;
+const hostEmail = process.env.hostEmail;
+const _adminEmail = process.env.adminEmail;
  
 // Send Email Verification Code
 export default async (req: any, res: any) => {
     const order: _ordersType_ = req.body;
-    const adminEmail = "sundaywht@gmail.com" || "info@buildbrothers.com";
+    const adminEmail = _adminEmail || "info@buildbrothers.com";
 
     try {
         const subject = `New Order from ${ order.customer.name }`;
@@ -158,7 +159,7 @@ export default async (req: any, res: any) => {
         `;
 
         const details = {
-            from: hostEmail,
+            from: `"Teen Tech Hub" <${ hostEmail }>`,
             to: adminEmail, // who should recieve the mail
             subject: subject,
             text: mailText,

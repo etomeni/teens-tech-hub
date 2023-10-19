@@ -42,7 +42,7 @@ const links = [
   { label: "About", link: "#about" },
   { label: "Program Training and Resources", link: "#program" },
   { label: "News", link: "#" },
-  { label: "Contact", link: "#" },
+  { label: "Contact", link: "/contact" },
   { label: "Support", link: "https://forms.gle/NUKcEeRim43szA5h7" },
   { label: "Events", link: "/events" },
   { label: "Shop", link: "/shop" },

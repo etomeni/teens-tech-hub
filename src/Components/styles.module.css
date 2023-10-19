@@ -1,90 +1,32 @@
-.main .pageTitleContainer {
-    text-align: center;
-    color: white;
-    background:
-        linear-gradient(
-            210deg,
-            var(--secondary1-2),
-            var(--secondary1-1)
-        ),
-    no-repeat center center / cover;
-}
-
-.main .pageTitleContainer .title {
-    padding: 50px 20px;
-    text-transform: uppercase;
-}
-
-
-/* FAQ PAGE STYLES */
-.faqPage .main a {
-    color: var(--primary1-1);
-    text-align: center;
-}
-
-.faqPage .main h1,
-.faqPage .main h2,
-.faqPage .main h3,
-.faqPage .main h4,
-.faqPage .main h5,
-.faqPage .main p {
-    text-align: center;
-}
-
-/* SUCCESS PAGE STYLES */
-.successPage .main {
+/* CONTACT PAGE STYLES */
+.contactPage .container {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    text-align: center;
+    /* flex-direction: column; */
+    margin: auto;
+    margin-top: 3rem;
+    /* min-height: 70vh; */
 }
 
-.successPage .main h1 {
-    color: var(--primary1-1);
-}
-
-.successPage .main .successTextMsg {
-    color: var(--primary1-2);
-}
-
-.successPage .main button {
-    text-transform: uppercase;
-    color: white;
-
-    background:
-    linear-gradient(
-        130deg,
-        var(--primary1-1),
-        var(--primary1-2)
-    )
-    no-repeat center center / cover;
+.contactPage .errorContainer .formError {
+    color: #de2341;
+    font-size: smaller;
+    padding-left: 15px;
 }
 
 
 /* NOT FOUND PAGE STYLES */
-.notFound .wrapperOutter {
+.notFound .container {
     text-align: center;
-    height: 100%;
-}
-
-.notFound .wrapperOutter .rowzz {
-    text-align: center;
-    height: 100%;
-}
-
-.notFound .wrapperOutter .error {
-    color: red;
-}
-
-.notFound .wrapperOutter .rowzz .yCenter {
+    min-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.notFound .wrapperOutter .rowzz .yCenter {
-    /* width: 100%; */
-    margin: auto;
-    /* color: white; */
-    /* padding: 10px; */
-    /* background-color: #fff; */
-    /* border-radius: 20px; */
+.notFound .container .error {
+    color: red;
 }

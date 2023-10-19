@@ -24,14 +24,14 @@ import {
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { getLocalStorage, removeLocalStorageItem, setLocalStorage } from "./resources";
 
-// Your web app's Firebase configuration
+// Web app's Firebase configuration
 // const firebaseConfig = {
-//     apiKey: "AIzaSyBcWXzNfY7mqWPdz10qXXnfXacNem51GAk",
-//     authDomain: "tth-backend.firebaseapp.com",
-//     projectId: "tth-backend",
-//     storageBucket: "tth-backend.appspot.com",
-//     messagingSenderId: "263351631142",
-//     appId: "1:263351631142:web:ef3aa0cbb59f456b67d5e7"
+//     apiKey: process.env.apiKey,
+//     authDomain: process.env.authDomain,
+//     projectId: process.env.projectId,
+//     storageBucket: process.env.storageBucket,
+//     messagingSenderId: process.env.messagingSenderId,
+//     appId: process.env.appId
 // };
 
 

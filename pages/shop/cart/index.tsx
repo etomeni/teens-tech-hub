@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -16,11 +16,10 @@ import {
   OnlinePrediction, Delete
 } from "@mui/icons-material";
 
-import { getLocalStorage, setLocalStorage } from "../../../src/serviceFunctions/storeage";
-import { sanitizedString } from "../../../src/serviceFunctions/resources";
+import { sanitizedString, getLocalStorage, setLocalStorage } from "../../../src/serviceFunctions/resources";
 import CheckOutView from "../../../src/Components/shop/checkOutView";
 import { _productsType_ } from "../../../src/typeModel";
-import SuccessPaymentModal from "../../../src/Components/shop/successPaymentModal";
+// import SuccessPaymentModal from "../../../src/Components/shop/successPaymentModal";
 
 const Cart: NextPage = () => {
   const [cart, setCart] = useState<_productsType_[]>([]);

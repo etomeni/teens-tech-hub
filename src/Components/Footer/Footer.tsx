@@ -18,10 +18,12 @@ import colors from "../Theming/Colors";
 
 const quickLinks: Array<any> = [
   { title: "Home", link: "/" },
-  { title: "About", link: "#about" },
-  { title: "Program Training And Resources", link: "#program" },
-  { title: "News", link: "#news" },
-  { title: "Contact", link: "#contact" },
+  { title: "About", link: "/#about" },
+  { title: "Program Training And Resources", link: "/#program" },
+  { title: "Shop", link: "/shop" },
+  { title: "News", link: "/#news" },
+  // { title: "Contact", link: "#contact" },
+  { title: "Contact", link: "/contact" },
 ];
 
 const socialLinks: Array<any> = [

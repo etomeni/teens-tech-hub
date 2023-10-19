@@ -25,7 +25,7 @@ import { Pagination, Autoplay, Navigation, Scrollbar, A11y } from "swiper";
 import products from "../../src/Components/shop/products";
 import { sanitizedString } from "../../src/serviceFunctions/resources";
 import { _productsType_ } from "../../src/typeModel";
-import { getLocalStorage, setLocalStorage } from "../../src/serviceFunctions/storeage";
+import { getLocalStorage, setLocalStorage } from "../../src/serviceFunctions/resources";
 import CheckOutView from "../../src/Components/shop/checkOutView";
 
 const Shop = () => {

@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import styles from "./shopStyles.module.css";
 import { evaluatedDate, formatedTime, save2FirestoreDB } from "../../serviceFunctions/firebase";
 import { _customersType_, _ordersType_, _productsType_ } from "../../typeModel";
+import { removeLocalStorageItem } from "../../serviceFunctions/resources";
 
 function CheckOutView({ products, closePayNowModal }: { products: _productsType_[], closePayNowModal: any}) {
     const [countries, setCountries] = useState<any[]>([]);
@@ -55,6 +56,15 @@ function CheckOutView({ products, closePayNowModal }: { products: _productsType_
         if (response) {
             // console.log(response);
 
+            const adminPhoneNumber = '2348052465145';
+            const message = `Hi, I'm ${ _order.customer.name } and I'm interested in buying ${ _order.products[0].name }, from Teen Tech Hub.`;
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappLink = `https://api.whatsapp.com/send?phone=${adminPhoneNumber}&text=${encodedMessage}`;
+            window.open(whatsappLink, '_blank');
+
+            closePayNowModal();
+            removeLocalStorageItem("cart");
+
             _order.id = response.id;
             const apiResponse = await fetch("/api/shop", {
                 method: "POST",
@@ -64,13 +74,9 @@ function CheckOutView({ products, closePayNowModal }: { products: _productsType_
                     "Accept": "application/json"
                 }
             });
-
-            closePayNowModal();
-
             console.log(apiResponse.json());
-
         } else {
-            console.log("first");
+            console.log("error");
         }
 
     }
@@ -81,12 +87,13 @@ function CheckOutView({ products, closePayNowModal }: { products: _productsType_
                 <Box marginBottom="15px">
                     <TextField variant="outlined" fullWidth 
                         id="outlined-basic" label="Full Name(s)"
+                        error={ errors.name ? true : false }
                         { 
                             ...register(
                             'name',
                                 {
                                     required: true,
-                                    // pattern: "[a-zA-Z0-9 ]+$",
+                                    pattern: /[a-zA-Z0-9 ]+$/,
                                     minLength: 4
                                 }
                             )
@@ -105,18 +112,26 @@ function CheckOutView({ products, closePayNowModal }: { products: _productsType_
                                 <div className={`${ styles.formError } form-text`}>Please enter your full name.</div>
                             )
                         }
+
+                        {
+                            errors.name && errors.name.type === "pattern" && (
+                                <div className={`${ styles.formError } form-text`}>No special character is allowed.</div>
+                            )
+                        }
                     </div>
                 </Box>
 
                 <Box marginBottom="15px">
                     <TextField variant="outlined" fullWidth 
                         id="outlined-basic" label="Email Address" 
+                        error={ errors.email ? true : false }
                         { 
                             ...register(
                             'email',
                                 {
                                     required: true,
                                     // pattern: "[a-zA-Z0-9 ]+$",
+                                    pattern: /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/,
                                     minLength: 4
                                 }
                             )
@@ -135,18 +150,26 @@ function CheckOutView({ products, closePayNowModal }: { products: _productsType_
                                 <div className={`${ styles.formError } form-text`}>Please enter a valid email address.</div>
                             )
                         }
+
+                        {
+                            errors.email && errors.email.type === "pattern" && (
+                                <div className={`${ styles.formError } form-text`}>Please enter a valid email address.</div>
+                            )
+                        }
                     </div>
                 </Box>
 
                 <Box marginBottom="15px">
                     <TextField variant="outlined" fullWidth 
                         id="outlined-basic" label="Phone Number"
+                        error={ errors.phoneNumber ? true : false }
                         { 
                             ...register(
                             'phoneNumber',
                                 {
                                     required: true,
                                     // pattern: "[a-zA-Z0-9 ]+$",
+                                    pattern: /^(?:\+\d{1,3})?[-.\s()]?\d{1,4}[-.\s()]?\d{1,4}[-.\s()]?\d{1,9}$/,
                                     minLength: 4
                                 }
                             )
@@ -165,12 +188,19 @@ function CheckOutView({ products, closePayNowModal }: { products: _productsType_
                                 <div className={`${ styles.formError } form-text`}>Please enter a valid phone number.</div>
                             )
                         }
+
+                        {
+                            errors.phoneNumber && errors.phoneNumber.type === "pattern" && (
+                                <div className={`${ styles.formError } form-text`}>Please enter a valid phone number.</div>
+                            )
+                        }
                     </div>
                 </Box>
                 
                 <Box marginBottom="15px">
                     <TextField variant="outlined" fullWidth 
                         id="outlined-basic" label="Physical Address"
+                        error={ errors.address ? true : false }
                         { 
                             ...register(
                             'address',
@@ -201,6 +231,7 @@ function CheckOutView({ products, closePayNowModal }: { products: _productsType_
                 <Box marginBottom="15px">
                     <TextField variant="outlined" fullWidth 
                         id="outlined-basic" label="State/Region/City"
+                        error={ errors.region ? true : false }
                         { 
                             ...register(
                             'region',
@@ -234,10 +265,10 @@ function CheckOutView({ products, closePayNowModal }: { products: _productsType_
                         select
                         label="Country"
                         variant="outlined"
-                        // required
                         fullWidth
                         defaultValue="Nigeria"
                         // helperText="Please select your currency"
+                        error={ errors.country ? true : false }
                         { 
                             ...register(
                             'country',

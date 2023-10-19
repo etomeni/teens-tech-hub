@@ -27,6 +27,13 @@ export type _ordersType_ = {
     createdAt: string
 }
 
+export type _contactForm_ = {
+    name: string,
+    email: string,
+    phoneNumber: string,
+    subject: string,
+    message: string
+}
 
 export enum conditionType {
     '!=' = "!=",
