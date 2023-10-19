@@ -17,7 +17,7 @@ import {
 import ProductItem from "../../src/Components/shop/item/ProductItem";
 // import products from "../../src/Components/shop/products";
 import { _productsType_ } from "../../src/typeModel";
-import { getLocalStorage, setLocalStorage } from "../../src/serviceFunctions/storeage";
+import { getLocalStorage, setLocalStorage } from "../../src/serviceFunctions/resources";
 import { getOrderedServiceData } from "../../src/serviceFunctions/firebase";
 import Loading from "../../src/Components/Loading/Loading";
 // import styles from "../../src/Components/shop/shopStyles.module.css";
