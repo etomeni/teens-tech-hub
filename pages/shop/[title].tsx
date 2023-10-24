@@ -32,28 +32,6 @@ const Shop = () => {
   const [openCheckboxModal, setOpenCheckboxModal] = useState(false);
   const handleOpenCheckboxModal = () => setOpenCheckboxModal(true);
   const handleCloseCheckboxModal = () => setOpenCheckboxModal(false);
-  // const [countries, setCountries] = useState<any[]>([]);
-
-  // const getContry = async () => {
-  //   const response = await fetch("https://restcountries.com/v3.1/all?fields=name,flags");
-  //   const country = await response.json();
-
-  //   country.sort((a: any, b: any) => {
-  //     const stringA = a.name.common.toUpperCase(); // Convert to uppercase for case-insensitive sorting
-  //     const stringB = b.name.common.toUpperCase();
-      
-  //     if (stringA < stringB) {
-  //       return -1;
-  //     } else if (stringA > stringB) {
-  //       return 1;
-  //     } else {
-  //       return 0; // Strings are equal
-  //     }
-  //   });
-  //   // console.log(country);
-
-  //   setCountries(country);
-  // }
 
   useEffect(
     () => {
@@ -61,30 +39,23 @@ const Shop = () => {
         if (res && res.length) {
           const products: _productsType_[] = res;
 
-          const _productItem: _productsType_ = products.filter((evt) => {
+          products.forEach(ele => {
             // return evt.id === router.query.title;
-            // return sanitizedString(evt.title) === router.query.title;
-            if(sanitizedString(evt.name) === router.query.title) {
-    
-              setProductItem(evt);
-              setDisplayImage(evt.images[0]);
-    
-              return evt;
+            if(sanitizedString(ele.name) === router.query.title) {
+              setProductItem(ele);
+              setDisplayImage(ele.images[0]);
             };
-          })[0];
+          });
         }
       });
-    }, 
-    [productItem]
+    }, []
+    // [productItem]
   );
 
   useEffect(
     () => {
-      // getContry();
-
       if (!cart.length) {
         getLocalStorage("cart").then((res: any) => {
-          // console.log(res);
           if (res && res.length) {
             setCart(res);
           }
@@ -96,12 +67,7 @@ const Shop = () => {
   useEffect(
     () => {
       setLocalStorage("cart", cart);
-      
-      // clean up function
-      return () => {
-      }
-    },
-    [cart]
+    }, [cart]
   );
 
   // if (!productItem) return null;
@@ -236,16 +202,24 @@ const Shop = () => {
                         ADD TO CART
                       </Button>
                           
-                      <Stack direction='row' spacing='auto'
+                      <Stack direction='row' spacing='15px' 
                         display={ cart.some((ele) => productItem.id == ele.id) ? '' : 'none' }
                       >
-                        <Button variant="contained" onClick={() => { handleCartItemCount(productItem, 'minus'); }}> - </Button>
+                        <Stack direction='row' spacing='auto' flexGrow={1} justifyContent="center" alignItems="center">
+                          <Button variant="contained" onClick={() => handleCartItemCount(productItem, 'minus') }> - </Button>
 
-                        <Typography variant="body2" color="primary"> 
-                          { cart.find((ele) => productItem.id == ele.id)?.count }
-                        </Typography>
+                          <Typography variant="body2" color="primary"> 
+                            { cart.find((ele) => productItem.id == ele.id)?.count }
+                          </Typography>
 
-                        <Button variant="contained" onClick={() => { handleCartItemCount(productItem, 'plus'); }}> + </Button>
+                          <Button variant="contained" onClick={() => handleCartItemCount(productItem, 'plus') }> + </Button>
+                        </Stack>
+
+                        <Stack direction='row' spacing='auto'>
+                          <Button variant="contained" fullWidth onClick={() => handleOpenCheckboxModal()}>
+                            BUY
+                          </Button>
+                        </Stack>
                       </Stack>
                     </Box>
                   </Card>
@@ -293,7 +267,7 @@ const Shop = () => {
 
                     <Box paddingX='15px' paddingY='10px'>
                       <Button variant="contained" fullWidth 
-                        onClick={() => { handleOpenCheckboxModal(); }}
+                        onClick={() => handleOpenCheckboxModal()}
                         disabled={ cart.reduce((sum: any, obj: any) => sum + (obj.price * obj.count || 1), 0) ? false : true }
                       >
                         CHECKOUT
@@ -333,19 +307,6 @@ const Shop = () => {
                                     { cartItem.name }
                                   </Typography>
                                 </Box>
-
-                                {/* <Box>
-                                  <Typography gutterBottom variant="h6" component="h6">
-                                    { 
-                                      Intl.NumberFormat('en-NG', {
-                                      style: 'currency',
-                                      currency: 'NGN',
-                                      maximumFractionDigits: 0,
-
-                                      }).format(cartItem.price)
-                                    }
-                                  </Typography>                      
-                                </Box> */}
                               </Stack>
                             </Stack>
                           </Box>
