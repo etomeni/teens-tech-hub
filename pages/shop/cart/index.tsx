@@ -5,16 +5,13 @@ import Link from "next/link";
 
 // mui
 import {
-  useTheme, Container, Box, Grid, Stack,
-  Card, CardMedia, CardContent, CardActionArea, CardHeader,
-  Typography, IconButton, Button, Badge, Modal
+  Container, Box, Grid, Stack,
+  Card, CardContent,
+  Typography, Button, Modal
 } from "@mui/material";
 
 // mui icons
-import { 
-  ShoppingCartOutlined, ShoppingCart, 
-  OnlinePrediction, Delete
-} from "@mui/icons-material";
+import { Delete  } from "@mui/icons-material";
 
 import { sanitizedString, getLocalStorage, setLocalStorage } from "../../../src/serviceFunctions/resources";
 import CheckOutView from "../../../src/Components/shop/checkOutView";
@@ -111,8 +108,8 @@ const Cart: NextPage = () => {
   return (
     <div style={{paddingTop: "25px", paddingBottom: "15px"}}>
       <Head>
-        <title>Teens Tech Hub - Cart</title>
-        <meta name="description" content="Teens Tech Hub - Shop" />
+        <title>Teen Tech Hub - Cart</title>
+        <meta name="description" content="Teen Tech Hub - Cart" />
         <meta name="keywords" content="Teens Shop, Teen Shop, Tech Shop, Tech Hub, Teens Hub, Teen Hub, Hub Shop" />
         <meta name="robots" content="index, follow" />
         <meta name="title" content="Cart" />
@@ -144,7 +141,7 @@ const Cart: NextPage = () => {
                             href={`/shop/${ sanitizedString(cartItem.name) }`}
                           >
                             <Box>
-                              <img src={ cartItem.image } 
+                              <img src={ cartItem.images[0] } 
                                 alt={ sanitizedString(cartItem.name) } 
                                 style={{ 
                                   maxWidth: "100px", float: "left", clear: "both", 

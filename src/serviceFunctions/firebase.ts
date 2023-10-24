@@ -25,7 +25,7 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { getLocalStorage, removeLocalStorageItem, setLocalStorage } from "./resources";
 
 // Web app's Firebase configuration
-// const firebaseConfig = {
+// const firebaseConfig: any = {
 //     apiKey: process.env.firebase_apiKey,
 //     authDomain: process.env.firebase_authDomain,
 //     projectId: process.env.firebase_projectId,
@@ -33,7 +33,6 @@ import { getLocalStorage, removeLocalStorageItem, setLocalStorage } from "./reso
 //     messagingSenderId: process.env.firebase_messagingSenderId,
 //     appId: process.env.firebase_appId
 // };
-
 
 // TEST FIREBASE PROJECT
 const firebaseConfig = {
@@ -45,7 +44,7 @@ const firebaseConfig = {
     appId: "1:397379365418:web:002edb21113cb8a7b27153",
     measurementId: "G-S68KCJ8HJ4"
 };
-  
+
   
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

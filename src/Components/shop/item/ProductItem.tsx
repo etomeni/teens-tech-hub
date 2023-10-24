@@ -21,7 +21,7 @@ function ProductItem(
                             width: '100%',
                             height: 200,
                         }}>
-                            <img src={ product.image } alt={ product.name } style={{
+                            <img src={ product.images[0] } alt={ product.name } style={{
                                 width: '100%',
                                 height: '200px',
                                 padding: '10px'

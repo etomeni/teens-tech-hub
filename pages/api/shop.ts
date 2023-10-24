@@ -60,7 +60,7 @@ export default async (req: any, res: any) => {
                             return `
                                 <h3> Product ${ index + 1 } </h3>
                                 <div>
-                                    <img src="${ element.image }" alt="${ element.name }" style="max-height: 120px; width: auto;" />
+                                    <img src="${ element.images[0] }" alt="${ element.name }" style="max-height: 120px; width: auto;" />
                                 </div>
                                 <ul>
                                     <li><b>Product Id: </b> ${ element.id } </li>

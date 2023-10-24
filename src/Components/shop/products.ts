@@ -20,7 +20,7 @@ const products: _productsType_[] = [
       purposes, it features a full-sized keyboard, so be active on the run, 
       rest assured that the HP 15 can keep up with the day's work.
     `,
-    image: "/images/shop/hp-pavillion.png",
+    images: ["/images/shop/hp-pavillion.png"],
     createdAt: "2023-10-16 5:05:28",
     updatedAt: "2023-10-16 5:05:28"
   },
@@ -39,7 +39,7 @@ const products: _productsType_[] = [
       Screen: 15.6" HD LED Display Touchscreen \n
       Operating System: Windows 10 \n
     `,
-    image: "/images/shop/hp-folio.png",
+    images: ["/images/shop/hp-folio.png"],
     createdAt: "2023-10-16 5:05:28",
     updatedAt: "2023-10-16 5:05:28"
   },
@@ -56,7 +56,7 @@ const products: _productsType_[] = [
       Chipset Intel SoC Platform \n
       Memory 4GB Soldered DDR4-2666
     `,
-    image: "/images/shop/toshiba.png",
+    images: ["/images/shop/toshiba.png"],
     createdAt: "2023-10-16 5:05:28",
     updatedAt: "2023-10-16 5:05:28"
   },
@@ -74,7 +74,7 @@ const products: _productsType_[] = [
       15.6" Full HD display1920 x 1080 resolution with native 1080p support 
       to showcase your games and HD movies with impressive color and clarity.
     `,
-    image: "/images/shop/mi-laptop.png",
+    images: ["/images/shop/mi-laptop.png"],
     createdAt: "2023-10-16 5:05:28",
     updatedAt: "2023-10-16 5:05:28"
   },
@@ -94,7 +94,7 @@ const products: _productsType_[] = [
       tasks and 50 percent more memory bandwidth, M2 brings astonishing 
       performance and new capabilities to 
     `,
-    image: "/images/shop/ipad-pen-stand.png",
+    images: ["/images/shop/ipad-pen-stand.png"],
     createdAt: "2023-10-16 5:05:28",
     updatedAt: "2023-10-16 5:05:28"
   },
@@ -112,7 +112,7 @@ const products: _productsType_[] = [
       multi-touch display with IPS technology. This iPad is equipped for superfast 
       Wi-Fi and cellular connectivity.
     `,
-    image: "/images/shop/ipad-frontView.png",
+    images: ["/images/shop/ipad-frontView.png"],
     createdAt: "2023-10-16 5:05:28",
     updatedAt: "2023-10-16 5:05:28"
   },
@@ -129,7 +129,7 @@ const products: _productsType_[] = [
       (sold separately), switch between apps and stream shows. 
       All without being slowed down.
     `,
-    image: "/images/shop/ipad-bothside.png",
+    images: ["/images/shop/ipad-bothside.png"],
     createdAt: "2023-10-16 5:05:28",
     updatedAt: "2023-10-16 5:05:28"
   },
@@ -151,7 +151,7 @@ const products: _productsType_[] = [
       8. 8MP rear camera + 8MP front camera \n
       9. Features: multiple eye protection modes, learning assistant, split-screen display
     `,
-    image: "/images/shop/sony-tablet.png",
+    images: ["/images/shop/sony-tablet.png"],
     createdAt: "2023-10-16 5:05:28",
     updatedAt: "2023-10-16 5:05:28"
   },

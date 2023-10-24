@@ -83,7 +83,7 @@ const ContactPage = () => {
     return (
         <main className={`${ styles.contactPage }`}>
             <section className={`${ styles.container }`}>
-                <form noValidate onSubmit={ handleSubmit(onSubmit) } style={{ width: '100%'}}>
+                <form noValidate onSubmit={ handleSubmit(onSubmit) } style={{ width: '100%', paddingLeft: "15px", paddingRight: "15px" }}>
                     <div data-aos="flip-left" style={{ marginBottom: "15px" }}>
                         <Typography variant="h1" color="primary" sx={_styles.title}>
                             Contact Us

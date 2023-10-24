@@ -15,7 +15,6 @@ import {
 } from "@mui/icons-material";
 
 import ProductItem from "../../src/Components/shop/item/ProductItem";
-// import products from "../../src/Components/shop/products";
 import { _productsType_ } from "../../src/typeModel";
 import { getLocalStorage, setLocalStorage } from "../../src/serviceFunctions/resources";
 import { getOrderedServiceData } from "../../src/serviceFunctions/firebase";
@@ -43,9 +42,6 @@ const Shop: NextPage = () => {
         }
       });
 
-      // getOrderedServiceData(
-      //   "products", "serviceType",
-      //   { property: "serviceType", condition: "==", value: "Audiomack" },
       getOrderedServiceData("products").then(
         (res: _productsType_[]) => {
           // console.log(res);
@@ -139,7 +135,7 @@ const Shop: NextPage = () => {
         price: 0,
         units: 0,
         description: "",
-        image: "",
+        images: [],
         count: 0,
         createdAt: "2023-10-16 5:05:28",
         updatedAt: "2023-10-16 5:05:28"

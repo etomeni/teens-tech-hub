@@ -4,7 +4,8 @@ export type _productsType_ = {
     price: number,
     units: number,
     description: string,
-    image: string,
+    images: string[],
+    // images: string[],
     count?: number,
     createdAt: string,
     updatedAt: string
