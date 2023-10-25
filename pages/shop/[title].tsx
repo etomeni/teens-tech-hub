@@ -49,7 +49,6 @@ const Shop = () => {
         }
       });
     }, []
-    // [productItem]
   );
 
   useEffect(
